@@ -1,0 +1,51 @@
+.header{
+  text-align: center;
+  height:120px;
+  background-color:black;
+  color:white;
+  padding-top:1px;
+
+}
+
+.heading{
+  padding-bottom:50px;
+  font-size:90px;
+}
+
+.navbarText{
+  text-decoration-color: white;
+  font-size:400px;
+  }
+
+.navsize{
+  padding-top:20px;
+  height:80px;
+  padding-left:30px;
+}
+
+a:hover{
+  text-decoration: underline;
+}
+
+body{
+  background-color:black;
+}
+
+/* carousel elements */
+
+.carouselElement{
+  height:500px;
+}
+.carouselImage{
+  border-radius:200px;
+}
+
+
+
+
+.footerText{
+  text-align: center;
+  color:#B2B2B2;
+
+  margin:50px;
+}
