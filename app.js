@@ -11,7 +11,8 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname, 'public')));
-mongoose.connect("mongodb://localhost:27017/bankDB",{useNewUrlParser:true});
+
+mongoose.connect("mongodb+srv://gpsunaina:Gold%401234@sparksfoundation.2avppqn.mongodb.net/BankDB?retryWrites=true&w=majority",{useNewUrlParser:true,useUnifiedTopology: true}).then(() => console.warn('db connection done'));
 
 const customerSchema = {
   BankID:Number,
@@ -42,12 +43,15 @@ const cust3 = new Customer({
   CustomerEmail:"Shedon@gmail.com",
   AccountBalance:1000
 });
+ cust1.save();
+ cust2.save();
+ cust3.save();
 
-// cust1.save();
-// cust2.save();
-// cust3.save();
 
 
+ app.get("/",function(req,res){
+  res.sendFile(__dirname +"/views/index.html" )
+});
 
 
 app.get("/customer",function(req,res){
@@ -63,9 +67,7 @@ app.get("/transfer",function(req,res){
 
 });
 
-app.get("/",function(req,res){
-  res.sendFile(__dirname +"/views/index.html" )
-});
+
 
 app.post("/transfer.html",function(req,res){
 
@@ -74,7 +76,7 @@ app.post("/transfer.html",function(req,res){
   const amount = req.body.amount;
 
   Customer.findOne({"BankID":customerID1},function(err,foundItems){
-  const newAmount1 = foundItems.AccountBalance - amount ;
+  const newAmount1 = parseInt(foundItems.AccountBalance) - parseInt(amount) ;
   console.log(newAmount1);
   // const filter1 = {'BankID' : customerID1 };
   // const update1 = {'AmountBalance' : newAmount1};
