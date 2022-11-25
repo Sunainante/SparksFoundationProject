@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+table, th, td {
+  border:1px solid black;
+}
+
+</style>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/css/stylestable.css">
+  
+  <title>Customer Details</title>
+</head>
+<body>
+
+
+<div class="headerdiv" >
+  <h1 class="header">TRANSACTIONS OF CUSTOMERS</h1>
+</div>
+  
+    <table class="tablecenter">
+  <tr>
+    
+    <th class="tablefont">BankID</th>
+    <th class="tablefont">Customer Name</th>
+    <th class="tablefont">Customer Email</th>
+    <th class="tablefont">Balance</th>
+  </tr>
+  <% content.map(function(element){ %>
+  <tr>
+    
+     
+     <td class="tablefontelements"><%=element.BankID%></td>
+    <td class="tablefontelements"><%=element.CustomerName%></td>
+    <td class="tablefontelements"><%=element.CustomerEmail%></td>
+    <td class="tablefontelements"><%= element.AccountBalance %></td>
+    
+  </tr>
+ 
+
+ <%  }) %>
+ </table>
+<div class="a1">
+  <a class="solid"href="/">Go To Home</a>
+</div>
+<div class="a2">
+  <a class="solid " href="/transfer">Transfer Money</a>
+</div>
+ 
+  
+</body>
+</html>

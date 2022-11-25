@@ -1,0 +1,156 @@
+const express = require("express");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+var path = require('path');
+//const ejsLint = require('ejs-lint');
+const app = express();
+let ejs = require('ejs');
+
+app.set('view engine', 'ejs');
+
+
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.static(path.join(__dirname, 'public')));
+
+mongoose.connect("mongodb+srv://gpsunaina:Gold%401234@sparksfoundation.2avppqn.mongodb.net/?retryWrites=true&w=majority",{useNewUrlParser:true,useUnifiedTopology: true}).then(() => console.warn('db connection done'));
+
+const customerSchema = {
+  BankID:Number,
+  CustomerName:String,
+  CustomerEmail:String,
+  AccountBalance:Number
+};
+
+const Customer = mongoose.model("customercollection",customerSchema);
+
+const cust1 = new Customer({
+  BankID : 001,
+  CustomerName : "Sunaina",
+  CustomerEmail:"gpsunaina@gmail.com",
+  AccountBalance:1000
+});
+
+const cust2 = new Customer({
+  BankID : 002,
+  CustomerName : "Mary Copper",
+  CustomerEmail:"MaryCoop@gmail.com",
+  AccountBalance:1000
+});
+
+const cust3 = new Customer({
+  BankID : 003,
+  CustomerName : "Sheldon",
+  CustomerEmail:"Shedon@gmail.com",
+  AccountBalance:1000
+});
+//  cust1.save();
+//  cust2.save();
+//  cust3.save();
+
+
+
+ app.get("/",function(req,res){
+  res.sendFile(__dirname +"/views/index.html" )
+});
+
+
+// app.get("/customer",function(req,res){
+// res.sendFile(__dirname+"/views/index.html");
+// Customer.find({},function(err,foundCustomers){
+//   //console.log(foundCustomers);
+//   res.render("customer",{content:foundCustomers})
+//});
+
+app.get("/",async(req,res)=> {
+  // const snapshot = await User.get();
+  // const list =  snapshot.docs.map((doc)=> doc.id);
+  //const list = snapshot.docs.map((doc)=> ({id:doc.id,...doc.data()}))
+  const snapshot = await db.collection('Users').get();
+  const list = snapshot.forEach((doc) => {
+    res.render("customer",{content:doc})
+  });
+
+
+app.get("/transfer",function(req,res){
+  res.sendFile(__dirname+"/views/transfer.html");
+
+});
+
+
+
+app.post("/transfer.html",function(req,res){
+
+  const customerID1 = req.body.customer1;
+  const customerID2 = req.body.customer2;
+  const amount = req.body.amount;
+
+//   Customer.findOne({"BankID":customerID1},function(err,foundItems){
+    
+//   const newAmount1 = parseInt(foundItems.AccountBalance) - parseInt(amount) ;
+//   console.log(newAmount1);
+//   // const filter1 = {'BankID' : customerID1 };
+//   // const update1 = {'AmountBalance' : newAmount1};
+//   Customer.findOneAndUpdate({"BankID" : customerID1 },{$set:{"AccountBalance" : newAmount1}},function(
+//     err,
+//     result
+//   ) {
+//     if (err) {
+//       res.send(err);
+//     } else {
+
+//     }
+//   });
+//   console.log(foundItems);
+
+// });
+
+const query = {"BankID" : {"$eq":customerID1}}
+console.log(Customer.findOne(query));
+
+
+
+Customer.findOne({"BankID":customerID2},function(err,foundItems){
+  var newAmount2 = parseInt(foundItems.AccountBalance) + parseInt(amount) ;
+  console.log(newAmount2);
+  Customer.findOneAndUpdate({"BankID" : customerID2 },{$set:{"AccountBalance" : newAmount2}},function(
+    err,
+    result
+  ) {
+    if (err) {
+      res.send(err);
+    } else {
+
+    }
+  });
+  console.log(foundItems);
+  
+
+});
+
+
+});
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.listen(3000,function(){
+  console.log("server is listening in port 3000");
+})
+});

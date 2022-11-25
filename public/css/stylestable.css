@@ -1,0 +1,36 @@
+/* CSS FOR THE TABLE IN customer.ejs */
+
+.tablecenter{
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .header{
+    margin: auto;
+    text-align: center;
+  }
+  .headerdiv{
+    padding: 50px;
+    font-size: 20px;
+  }
+  .tablefont{
+    font-size:30px;
+    padding:10px;
+  }
+
+  .tablefontelements{
+    font-size:20px;
+    padding:8px;
+  }
+
+  .buttondiv{
+    margin: auto;
+  }
+
+ .a1{
+    padding:20px;
+ } 
+ .a2{
+    padding: 20px;
+ }
+ 

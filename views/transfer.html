@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Money Transfer</title>
+</head>
+<body>
+<h1>MONEY TRANSFER PAGE</h1>
+
+<form class="" action="/transfer" method="post">
+  <label for="customer1"><strong>CUSTOMER 1</strong></label>
+        <input type="text" placeholder="Customer 1 ID" name="customer1" id="cust1" required>
+        <label for="customer2"><strong>CUSTOMER 2</strong></label>
+        <input type="text" placeholder="Customer 2 ID" name="customer2" required>
+        <label for="money">Enter Amount</label>
+        <input type="number" placeholder="Enter amount" name="amount" value="">
+        <div>
+          <button type="submit" name="Submit">TRANSFER</button>
+        </div>
+</form>
+<script type="module" src="app.js"></script> 
+<div>
+  <a href="/customer">See Transaction</a>
+
+</div>
+
+
+</body>
+</html>
